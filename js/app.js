@@ -36,7 +36,7 @@ function createNavItem(id, name) {
 }
 
 function isInViewport(elem) {
-	var distance = elem.getBoundingClientRect();
+	let distance = elem.getBoundingClientRect();
 	return (
 		distance.top >= 0 &&
 		distance.left >= 0 &&
