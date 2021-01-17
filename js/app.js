@@ -35,7 +35,7 @@ function createNavItem(id, name) {
     return `<a class ="menu__link" data-id="${id}">${name}</a>`; 
 }
 
-var isInViewport = function (elem) {
+function isInViewport(elem) {
 	var distance = elem.getBoundingClientRect();
 	return (
 		distance.top >= 0 &&
@@ -54,7 +54,7 @@ var isInViewport = function (elem) {
 
 
 // build the nav
-function buildNav(){
+(function (){
     sections.forEach(section => {
         const menuItem = document.createElement('li');
         const id = section.getAttribute('id');
@@ -65,16 +65,22 @@ function buildNav(){
     })
 
     navBarList.appendChild(fragment);
-}
+})();
 
 // Add class 'active' to section when near top of viewport
 function setActive(){
-    sections.forEach(section => {
-        if(isInViewport(section))
-            section.classList.add(activeStateClass);
-        else
-            section.classList.remove(activeStateClass);
-    })
+
+    let menuItems = document.querySelectorAll('.menu__link');
+
+    for (let index=0; index < sections.length; index++){
+        if(isInViewport(sections[index])) {
+            sections[index].classList.add(activeStateClass);
+            menuItems[index].classList.add(activeStateClass);
+        } else {
+            sections[index].classList.remove(activeStateClass);
+            menuItems[index].classList.remove(activeStateClass);
+        }
+    }
 }
 
 // Scroll to anchor ID using scrollTO event
@@ -99,7 +105,6 @@ function setSectionsScrollEvent(){
 
 
 // Build menu 
-buildNav()
 
 // Scroll to section on link click
 setSectionsScrollEvent()
