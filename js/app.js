@@ -71,14 +71,16 @@ function isInViewport(elem) {
 function setActive(){
 
     let menuItems = document.querySelectorAll('.menu__link');
-
-    for (let index=0; index < sections.length; index++){
-        if(isInViewport(sections[index])) {
-            sections[index].classList.add(activeStateClass);
-            menuItems[index].classList.add(activeStateClass);
-        } else {
-            sections[index].classList.remove(activeStateClass);
-            menuItems[index].classList.remove(activeStateClass);
+    for (let menuItemIndex = 0; menuItemIndex < menuItems.length; menuItemIndex++) {
+        for (let sectionIndex=0; sectionIndex < sections.length; sectionIndex++){
+                if(isInViewport(sections[sectionIndex]) && sections[sectionIndex].id === menuItems[menuItemIndex].dataset.id ) {
+                    sections[sectionIndex].classList.add(activeStateClass);
+                    menuItems[menuItemIndex].classList.add(activeStateClass);
+                    scrollToElement(sections[sectionIndex])
+                } else {
+                    sections[sectionIndex].classList.remove(activeStateClass);
+                    menuItems[menuItemIndex].classList.remove(activeStateClass);
+                }
         }
     }
 }
