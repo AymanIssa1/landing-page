@@ -38,9 +38,9 @@ function createNavItem(id, name) {
 function isInViewport(elem) {
 	let distance = elem.getBoundingClientRect();
 	return (
-		distance.top >= 0 &&
+		distance.top >= -300 &&
 		distance.left >= 0 &&
-		distance.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+		distance.bottom <= (1.3 * window.innerHeight || document.documentElement.clientHeight) &&
 		distance.right <= (window.innerWidth || document.documentElement.clientWidth)
 	);
 };
